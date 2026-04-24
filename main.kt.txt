@@ -1,0 +1,58 @@
+/**
+ * UTS PBO - Sistem KantinPay ITK
+ * Nama: Rizky Augusta Gozzal
+ * NIM: 04231078
+ */
+
+class Mahasiswa(val nama: String, private val pin: String, saldoAwal: Double) {
+    var saldo: Double = saldoAwal
+        private set
+
+    fun cekPin(inputPin: String): Boolean = inputPin == pin
+
+    fun kurangiSaldo(jumlah: Double) {
+        if (jumlah <= saldo) saldo -= jumlah
+    }
+}
+
+class Menu(val namaProduk: String, val harga: Double, stokAwal: Int) {
+    var stok: Int = stokAwal
+        private set
+
+    fun updateStok() {
+        if (stok > 0) stok--
+    }
+}
+
+class StandMakanan(val namaStand: String) {
+    fun prosesTransaksi(pembeli: Mahasiswa, produk: Menu, inputPin: String) {
+        println("--- Transaksi di $namaStand ---")
+        if (!pembeli.cekPin(inputPin)) {
+            println("[HASIL] GAGAL: PIN Salah!\n")
+            return
+        }
+        if (produk.stok <= 0) {
+            println("[HASIL] GAGAL: Stok Habis!\n")
+            return
+        }
+        if (pembeli.saldo < produk.harga) {
+            println("[HASIL] GAGAL: Saldo Kurang!\n")
+            return
+        }
+
+        pembeli.kurangiSaldo(produk.harga)
+        produk.updateStok()
+        println("[HASIL] SUKSES! Sisa Saldo: ${pembeli.saldo}\n")
+    }
+}
+
+fun main() {
+    val rizky = Mahasiswa("Rizky Augusta", "04231078", 20000.0)
+    val ayam = Menu("Ayam Geprek", 15000.0, 1)
+    val kantin = StandMakanan("Kantin ITK")
+
+    // Simulasi
+    kantin.prosesTransaksi(rizky, ayam, "1234") // Gagal PIN
+    kantin.prosesTransaksi(rizky, ayam, "04231078") // Sukses
+    kantin.prosesTransaksi(rizky, ayam, "04231078") // Gagal Stok
+}
