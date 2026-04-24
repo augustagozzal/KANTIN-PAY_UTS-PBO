@@ -1,20 +1,28 @@
-# UTS PBO - RIZKY AUGUSTA GOZZAL
-echo "# KantinPay ITK - Sistem E-Wallet Kantin" > README.md
-echo "" >> README.md
-echo "## Anggota Kelompok / Identitas" >> README.md
-echo "* **Nama:** Rizky Augusta Gozzal" >> README.md
-echo "* **NIM:** 04231078" >> README.md
-echo "" >> README.md
-echo "## Tahap 1: Analisis Paradigma OOP" >> README.md
-echo "Sistem KantinPay ITK menggunakan paradigma Berorientasi Objek (OOP) karena lebih aman dibandingkan paradigma Terstruktur. Dengan **Enkapsulasi**, data sensitif seperti Saldo dan PIN Mahasiswa dilindungi menggunakan modifier \`private\`. Jika menggunakan variabel global (Terstruktur), pihak luar bisa langsung mengubah saldo tanpa verifikasi PIN, yang merupakan masalah keamanan fatal." >> README.md
-echo "" >> README.md
-echo "## Tahap 2: Pemodelan Sistem" >> README.md
-echo "### Aturan Bisnis (Business Rules):" >> README.md
-echo "1. Pembelian hanya sah jika PIN Mahasiswa benar." >> README.md
-echo "2. Saldo Mahasiswa harus cukup untuk membeli menu (tidak boleh minus)." >> README.md
-echo "3. Stok Menu harus lebih dari 0 sebelum transaksi diproses." >> README.md
-echo "" >> README.md
-echo "### Entitas (Classes):" >> README.md
-echo "* **Mahasiswa:** Menyimpan data Nama, PIN, dan Saldo." >> README.md
-echo "* **Menu:** Menyimpan data Nama Makanan, Harga, dan Stok." >> README.md
-echo "* **StandMakanan:** Menangani logika validasi transaksi dan pengurangan stok/saldo." >> README.md
+cat <<EOF > README.md
+# KantinPay ITK - Sistem E-Wallet Kantin
+
+## Identitas Mahasiswa
+* **Nama:** Rizky Augusta Gozzal
+* **NIM:** 04231078
+* **Email:** 04231078@student.itk.ac.id
+
+---
+
+## Tahap 1: Analisis Paradigma OOP
+Sistem **KantinPay ITK** dirancang menggunakan paradigma **Berorientasi Objek (OOP)**. Paradigma ini dipilih karena faktor keamanan yang lebih unggul dibandingkan paradigma Prosedural/Terstruktur. 
+
+Dengan menerapkan prinsip **Enkapsulasi**, data sensitif seperti *Saldo* dan *PIN Mahasiswa* dapat dilindungi menggunakan modifier \`private\`. Hal ini mencegah pihak luar memanipulasi data secara langsung. Dalam paradigma terstruktur, variabel global sangat berisiko diubah tanpa verifikasi, yang dapat menyebabkan kerugian pada sistem transaksi.
+
+---
+
+## Tahap 2: Pemodelan Sistem
+### Business Rules (Aturan Bisnis):
+1. **Verifikasi PIN:** Transaksi hanya dapat diproses jika PIN yang dimasukkan sesuai dengan data Mahasiswa.
+2. **Cukup Saldo:** Sistem akan menolak transaksi jika saldo Mahasiswa lebih kecil dari total harga menu.
+3. **Ketersediaan Stok:** Transaksi hanya bisa dilakukan jika stok menu masih tersedia (Stok > 0).
+
+### Entitas Utama:
+* **Mahasiswa:** Mengelola data user (Nama, PIN, Saldo).
+* **Menu:** Mengelola informasi produk (Nama Menu, Harga, Stok).
+* **StandMakanan:** Logika utama untuk memproses transaksi dan validasi.
+EOF
